@@ -1,10 +1,16 @@
 {
-  "name": "chaoli",
-  "displayName": "text2new",
-  "description": "",
-  "version": "0.0.1",
+  "name": "text2new",
+  "displayName": "Text To New",
+  "description": "将选中的文本替换为新的格式",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.96.0"
+  },
+  "publisher": "chaoli279",
+  "license":"Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chaolihf/text2new.git"
   },
   "categories": [
     "Other"
@@ -13,19 +19,40 @@
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
-            {
-                "command": "extension.uppercaseText",
-                "title": "Convert to Uppercase"
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "command": "extension.uppercaseText",
-                    "when": "editorTextFocus"
-                }
-            ]
+      {
+        "command": "extension.text2Json",
+        "title": "文本转JSON串"
+      },
+      {
+        "command": "extension.json2Text",
+        "title": "JSON串转文本"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "textToNewMenu",
+        "label": "文本转化" 
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "group": "navigation",
+          "submenu": "textToNewMenu",
+          "when": "editorTextFocus"
         }
+      ],
+      "textToNewMenu": [
+        {
+          "command": "extension.json2Text",
+          "group":"2"
+        },
+        {
+          "command": "extension.text2Json",
+          "group":"1"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
